@@ -13,4 +13,9 @@ class Article < ActiveRecord::Base
   def long_title
     "#{title} - #{published_at}"
   end
+
+  def self.get_all_articles
+    return Article.all
+  end
+
 end

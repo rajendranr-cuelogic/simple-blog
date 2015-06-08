@@ -25,10 +25,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<!--<p class="notice"><%= notice %></p>-->
-<!--<p class="alert"><%= alert %></p>-->
-
-<%= yield %>
-
+<%= render 'layouts/front_end_nav_bar' %>
+<%= render 'layouts/front_end_header' %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <% @articles.each do |article| %>
+          <div class="post-preview">
+            <a href="/articles/<%= article.id %>">
+              <h2 class="post-title">
+                <%= article.title %>
+              </h2>
+              <h3 class="post-subtitle">
+                <%= article.title %>
+              </h3>
+            </a>
+            <p class="post-meta">Posted by <a href="#"><%= article.user.name unless article.user.blank? %></a> <%= article.published_at %>
+            </p>
+          </div>
+          <hr>
+      <% end %>
+      <!-- Pager -->
+      <ul class="pager">
+        <li class="next">
+          <a href="#">Older Posts &rarr;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/front_end_footer' %>
 </body>
 </html>

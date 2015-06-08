@@ -1,19 +1,30 @@
-<p id="notice"><%= notice %></p>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/assets/post-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1><%= @article.title %></h1>
+          <h2 class="subheading"><%= @article.sub_title unless @article.sub_title.blank? %></h2>
+          <span class="meta">Posted by <a href="#"><%= @artile.user.name unless @article.user.blank? %> </a> <%= @article.published_at.strftime("%m/%d/%Y") %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p><%= @article.body %></p>
+      </div>
+    </div>
+  </div>
+</article>
 
-<p>
-  <strong>Body:</strong>
-  <%= @article.body %>
-</p>
-
-<p>
-  <strong>Published at:</strong>
-  <%= @article.published_at %>
-</p>
-
+<hr>
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
