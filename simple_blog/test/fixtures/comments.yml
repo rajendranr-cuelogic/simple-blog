@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  article_id: 1
-  name: MyString
-  email: MyString
+  article_id: 
+  name: 
+  email: 
   body: MyText
 
 two:
-  article_id: 1
-  name: MyString
-  email: MyString
+  article_id: 
+  name: 
+  email: 
   body: MyText

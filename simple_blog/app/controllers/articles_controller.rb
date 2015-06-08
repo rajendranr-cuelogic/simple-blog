@@ -1,16 +1,21 @@
 class ArticlesController < ApplicationController
-  layout 'admin_dashboard'
+  layout 'admin_dashboard', except: [:show]
+
+  before_action :authenticate_user!, only: [:index, :new, :edit, :update, :destroy]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
-  # GET /articles.json
   def index
     @articles = Article.all
   end
 
   # GET /articles/1
-  # GET /articles/1.json
   def show
+    if current_user
+      layout 'admin_dashboard'
+    end
+    article_id = params[:id]
+    @comments = Comment.get_comments(article_id)
   end
 
   # GET /articles/new
@@ -23,10 +28,8 @@ class ArticlesController < ApplicationController
   end
 
   # POST /articles
-  # POST /articles.json
   def create
-    @article = Article.new(article_params)
-
+    @article = current_user.articles.new(article_params)
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
@@ -39,8 +42,8 @@ class ArticlesController < ApplicationController
   end
 
   # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
   def update
+    @article = current_user.articles.find(params[:id])
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -53,7 +56,6 @@ class ArticlesController < ApplicationController
   end
 
   # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @article.destroy
     respond_to do |format|
@@ -70,6 +72,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :body, :published_at)
+      params.require(:article).permit(:title, :body, :published_at, :sub_title)
     end
 end
