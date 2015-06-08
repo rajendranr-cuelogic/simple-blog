@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   #Associations
   has_many :articles, dependent: :destroy
+  has_many :comments, through: :articles
 end
