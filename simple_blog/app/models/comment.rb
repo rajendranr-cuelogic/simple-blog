@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  #Validations
+  validates :name, :body, presence: true
+
   #Associations
   belongs_to :article
 
